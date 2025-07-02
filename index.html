@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Display Iklan - Variasi Durasi</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+    }
+    iframe {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <iframe id="player" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+  <script>
+    // Daftar video dan durasi per video (dalam milidetik)
+    const playlist = [
+      { id: "ay8DkyNS-3A", duration: 59000 },
+      { id: "j6PmeiBjpjk", duration: 56000 },
+      { id: "_8VbMxQ9PEE", duration: 51000 },
+      { id: "5hfDcLWz6ws", duration: 81000 }
+    ];
+
+    let index = 0;
+    const player = document.getElementById("player");
+
+    function playNext() {
+      const video = playlist[index];
+      player.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&controls=0&loop=0&modestbranding=1&rel=0&playsinline=1&playlist=${video.id}`;
+
+      setTimeout(() => {
+        index = (index + 1) % playlist.length;
+        playNext();
+      }, video.duration);
+    }
+
+    playNext();
+  </script>
+</body>
+</html>
